@@ -4,6 +4,53 @@ A multi-zone site collecting Andrew's Codegrid tutorial practice projects, publi
 
 **https://ap-codegrid.vercel.app/**
 
+## How this is put together (read this first)
+
+**The big idea:** this isn't one website - it's a thin homepage plus several completely
+independent Next.js apps, stitched together at the hosting layer so they *look* like one site.
+Each Codegrid tutorial gets copied into the repo twice: once as an ongoing practice version, once
+as a frozen copy of the original starter for comparison. Nothing is shared between them - no
+shared components, no shared CSS, no shared `node_modules`. The only things unifying them are a
+homepage that links to each one, and a routing rule that proxies each path prefix to the right
+deployment. See the FAQ right below for why it's built this way instead of as one shared app.
+
+**How that plays out in the repo:**
+
+```
+site/              -> the homepage: static index.html + vercel.json (the routing glue)
+tutorials/
+  <tutorial-name>/
+    mine/           -> your ongoing practice version, a full standalone Next.js app
+    cg_example/     -> frozen copy of the original Codegrid starter
+```
+
+Each `mine/`/`cg_example/` folder is a real, complete Next.js project with its own
+`package.json`, `node_modules`, and pinned Next.js version. The only things its `next.config.mjs`
+adds beyond a normal Next app are `output: 'export'` (static HTML, no server needed), `basePath`
+(so the app knows it lives at e.g. `/obsidian` and not the domain root - see "What is basePath"
+below if that's unfamiliar), and `trailingSlash: true`.
+
+On the hosting side, each of those folders is its own separate Vercel project, all pointed at the
+same GitHub repo via a per-project "Root Directory" setting, each redeploying itself automatically
+on every push. `site/vercel.json` is what makes it feel like one domain: a request for
+`/obsidian/threshold/` gets reverse-proxied to `ap-codegrid-obsidian.vercel.app/obsidian/threshold/`
+behind the scenes, and the visitor never sees that second domain. Full details in Deployment below.
+
+Locally, the root `package.json` is purely a convenience layer - `npm run setup` installs every
+zone's dependencies, `npm run dev` runs every zone's dev server at once (via `concurrently`), and
+`site/index.html` swaps its links to `localhost` URLs when it detects it's running locally. None
+of this root-level tooling is involved in production at all.
+
+**What "basePath" actually is**, since it comes up constantly in this README: it's a Next.js
+config option that tells the framework "this app isn't living at the root of its domain, it's
+living under this subpath instead." Next then automatically carries that prefix through
+everything it generates itself - page routes, `_next` asset URLs, `next/link` hrefs, `next/image`
+srcs. What it does *not* do is touch anything hand-written that isn't going through Next's own
+APIs - a literal string in CSS, or a library that reads a resolved DOM attribute instead of the
+original route. Both of those gaps caused real bugs in this repo (see Gotcha 0 in Deployment, and
+the background-image fix in git history) - anything added to a zone that isn't plain Next.js
+markup/routing needs a manual check for whether it accounts for `basePath` on its own.
+
 ## FAQ: why does this look like 4 separate apps instead of 1 website?
 
 - **Is the content here, or just referenced from my other tutorial folders?** It's really here. Everything under tutorials/ was physically copied in (not symlinked, not a git submodule, no link back to the original folders). You can delete the original tutorial folders elsewhere on disk and this repo keeps working exactly as-is.
