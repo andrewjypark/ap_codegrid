@@ -1,12 +1,16 @@
 {
   "rewrites": [
     { "source": "/obsidian/cg_example", "destination": "https://ap-codegrid-obsidian-cg.vercel.app/obsidian/cg_example" },
+    { "source": "/obsidian/cg_example/", "destination": "https://ap-codegrid-obsidian-cg.vercel.app/obsidian/cg_example/" },
     { "source": "/obsidian/cg_example/:match*", "destination": "https://ap-codegrid-obsidian-cg.vercel.app/obsidian/cg_example/:match*" },
     { "source": "/obsidian", "destination": "https://ap-codegrid-obsidian.vercel.app/obsidian" },
+    { "source": "/obsidian/", "destination": "https://ap-codegrid-obsidian.vercel.app/obsidian/" },
     { "source": "/obsidian/:match*", "destination": "https://ap-codegrid-obsidian.vercel.app/obsidian/:match*" },
     { "source": "/sticky-cards/cg_example", "destination": "https://ap-codegrid-sticky-cg.vercel.app/sticky-cards/cg_example" },
+    { "source": "/sticky-cards/cg_example/", "destination": "https://ap-codegrid-sticky-cg.vercel.app/sticky-cards/cg_example/" },
     { "source": "/sticky-cards/cg_example/:match*", "destination": "https://ap-codegrid-sticky-cg.vercel.app/sticky-cards/cg_example/:match*" },
     { "source": "/sticky-cards", "destination": "https://ap-codegrid-sticky.vercel.app/sticky-cards" },
+    { "source": "/sticky-cards/", "destination": "https://ap-codegrid-sticky.vercel.app/sticky-cards/" },
     { "source": "/sticky-cards/:match*", "destination": "https://ap-codegrid-sticky.vercel.app/sticky-cards/:match*" }
   ]
 }
