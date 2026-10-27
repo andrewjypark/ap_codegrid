@@ -2,7 +2,7 @@
 const nextConfig = {
   transpilePackages: ['ap-ds-storybook'],
   output: 'export',
-  basePath: '/ap_codegrid/sticky-cards',
+  basePath: '/sticky-cards',
   images: { unoptimized: true },
   trailingSlash: true,
 };

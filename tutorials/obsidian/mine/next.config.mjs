@@ -2,7 +2,7 @@
 const nextConfig = {
   transpilePackages: ['ap-ds-storybook'],
   output: 'export',
-  basePath: '/ap_codegrid/obsidian',
+  basePath: '/obsidian',
   images: { unoptimized: true },
   trailingSlash: true,
 };
