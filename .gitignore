@@ -1,0 +1,13 @@
+# dependencies
+**/node_modules
+
+# Next.js build output
+**/.next
+**/out
+
+# merged deploy output
+/dist
+
+# misc
+.DS_Store
+*.log

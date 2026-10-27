@@ -1,0 +1,181 @@
+:root {
+  --bg: #0f0f0f;
+  --fg: #f2f0e6;
+  --transition-grid: #f2f0e6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============================
+   Base / utility classes
+   Global — usable in any page or component, no import needed
+   ============================ */
+
+.ap_grid_container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: stretch;
+  font: var(var(--ap-tier-2-typography-body-default))
+
+}
+
+/* Combo class — stacked onto .ap_grid_container, e.g.
+   className="ap_grid_container banner_1" */
+.banner_1 {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.ap_grid_1 {
+  position: relative;
+  display: grid;
+  width: 100%;
+  max-width: 1440px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  grid-auto-columns: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-columns: minmax(0px, 0.5fr) 1fr 1fr 1fr 1fr 1fr 1fr minmax(0px, 0.5fr);
+  grid-template-rows: auto;
+  background-color: transparent;
+}
+
+@media screen and (max-width: 767px) {
+  .ap_grid_1 {
+    grid-template-columns: minmax(0px, 0.5fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(0px, 0.5fr);
+  }
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.navbar-items {
+  display: flex;
+  gap: clamp(1rem, 4vw, 2rem);
+}
+
+.navbar-item {
+  padding: 1.5rem;
+}
+
+.navbar-item a {
+  text-decoration: none;
+  color: var(--fg);
+  font-family: var(--font-instrument-sans);
+  font-weight: 500;
+  letter-spacing: -2%;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  background-color: va(--bg);
+  color: var(--fg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: var(--);
+}
+
+.hero.genesis {
+  background: url(/img1.jpg) no-repeat 50% 50%;
+  background-size: cover;
+}
+.hero.threshold {
+  background: url(/img2.jpg) no-repeat 50% 50%;
+  background-size: cover;
+}
+.hero.sanctum {
+  background: url(/img3.jpg) no-repeat 50% 50%;
+  background-size: cover;
+}
+
+.hero h1 {
+  font-family: var(--font-instrument-serif);
+  font-size: clamp(5rem, 15vw, 20rem);
+  font-weight: 500;
+  letter-spacing: -3%;
+  line-height: 1;
+}
+
+@media (max-width: 1000px) {
+  .navbar {
+    padding: 2rem;
+  }
+
+  .navbar-items {
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .navbar-item {
+    padding: 0.25rem;
+  }
+}
+
+.transition-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.transition-block {
+  flex: 1;
+  width: 100%;
+  background-color: var(--transition-grid);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.transition-text {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 101;
+}
+
+.transition-text h1 {
+  font-family: var(--font-instrument-serif);
+  font-size: clamp(1.5rem, 3vw, 4.5rem);
+  font-weight: 500;
+  letter-spacing: -3%;
+  line-height: 1;
+  color: var(--bg);
+}
+
+.transition-text .word {
+  transform: translateY(100%);
+  will-change: transform;
+}
