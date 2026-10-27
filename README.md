@@ -4,6 +4,16 @@ A multi-zone static site collecting Andrew's Codegrid tutorial practice projects
 
 **https://andrewjypark.github.io/ap_codegrid/**
 
+## FAQ: why does this look like 4 separate apps instead of 1 website?
+
+- **Is the content here, or just referenced from my other tutorial folders?** It's really here. Everything under tutorials/ was physically copied in (not symlinked, not a git submodule, no link back to the original folders). You can delete the original tutorial folders elsewhere on disk and this repo keeps working exactly as-is.
+- **Why isn't this one Next.js app with shared routing?** Each tutorial has its own Next.js/React
+  version and its own global CSS using bare, unscoped selectors (body, h1, section, etc).
+  Loading two tutorials' CSS into one app lets one tutorial's styles silently override the
+  other's (confirmed with a throwaway test build before choosing this structure). Separate apps
+  means that collision can never happen, at the cost of 4 folders instead of 1.
+- **Does it still deploy as one website?** Yes. scripts/build-all.sh builds each zone separately, then merges their static output into one dist/ folder that becomes the one live site at the URL above.
+
 ## Structure
 
 Each tutorial lives under `tutorials/<name>/` as two completely independent Next.js apps:
@@ -21,7 +31,7 @@ tutorials/
     cg_example/
 ```
 
-Each zone is a standalone app with its own package.json, node_modules, and next.config.mjs - nothing is shared between zones. This is deliberate ("multi-zone"): a dependency or CSS change in one tutorial can never break another, and adding a new tutorial later is just adding another isolated folder.
+Each zone is a standalone app with its own package.json, node_modules, and next.config.mjs - nothing is shared between zones.
 
 ## Adding a new tutorial
 
