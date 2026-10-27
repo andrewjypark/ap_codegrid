@@ -94,15 +94,15 @@
 }
 
 .hero.genesis {
-  background: url(/img1.jpg) no-repeat 50% 50%;
+  background: url(/obsidian/img1.jpg) no-repeat 50% 50%;
   background-size: cover;
 }
 .hero.threshold {
-  background: url(/img2.jpg) no-repeat 50% 50%;
+  background: url(/obsidian/img2.jpg) no-repeat 50% 50%;
   background-size: cover;
 }
 .hero.sanctum {
-  background: url(/img3.jpg) no-repeat 50% 50%;
+  background: url(/obsidian/img3.jpg) no-repeat 50% 50%;
   background-size: cover;
 }
 
