@@ -20,8 +20,6 @@
   width: 100%;
   justify-content: center;
   align-items: stretch;
-  font: var(--ap-tier-2-typography-body-default);
-
 }
 
 /* Combo class — stacked onto .ap_grid_container, e.g.
@@ -85,13 +83,12 @@
   position: relative;
   width: 100%;
   height: 100svh;
-  background-color: va(--bg);
+  background-color: var(--bg);
   color: var(--fg);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  font-family: var(--);
 }
 
 .hero.genesis {

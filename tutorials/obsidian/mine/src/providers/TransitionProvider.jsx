@@ -101,7 +101,6 @@ export default function TransitionProvider({ children }) {
 
   return (
     <TransitionRouter
-      auto
       leave={(next) => {
         const tl = animateIn(next);
         return () => tl.kill();
