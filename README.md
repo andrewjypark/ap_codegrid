@@ -46,6 +46,41 @@ Run ./scripts/build-all.sh
 
 This runs npm install and npm run build in every zone, then merges each zone's static out/ export into one dist/ tree matching the site's final URL layout. Preview it with npx serve dist.
 
+## Local development (live-reloading dev servers)
+
+For day-to-day work you don't need to build anything - the root package.json runs the
+homepage and all four tutorial dev servers together, each with live reload.
+
+First time only:
+
+```
+npm run setup
+```
+
+This installs dependencies at the root and in every tutorial zone (5 npm installs total).
+
+Then, any time you want to work on the site:
+
+```
+npm run dev
+```
+
+This starts 5 processes at once (via concurrently), each in its own labeled, colored log line:
+
+- site - the homepage, at http://localhost:8080
+- obsidian - obsidian/mine, at http://localhost:3002/ap_codegrid/obsidian/
+- obsidian-cg - obsidian/cg_example, at http://localhost:3012/ap_codegrid/obsidian/cg_example/
+- sticky - sticky-cards/mine, at http://localhost:3000/ap_codegrid/sticky-cards/
+- sticky-cg - sticky-cards/cg_example, at http://localhost:3010/ap_codegrid/sticky-cards/cg_example/
+
+Open http://localhost:8080 and click a project link - the homepage detects it's running
+locally and automatically points each link at that zone's dev server above, instead of the
+production relative paths it uses once deployed. Stop everything with Ctrl+C.
+
+Each zone runs on its own pinned Next.js version (via its own node_modules/.bin/next), so
+this always matches what scripts/build-all.sh and GitHub Actions actually build - nothing
+here silently runs a different Next.js version than the project expects.
+
 ## Deployment
 
 .github/workflows/deploy.yml runs scripts/build-all.sh on every push to main and publishes dist/ to GitHub Pages via actions/upload-pages-artifact plus actions/deploy-pages.

@@ -1,0 +1,16 @@
+{
+  "name": "ap_codegrid",
+  "private": true,
+  "scripts": {
+    "setup": "npm install && npm install --prefix tutorials/obsidian/mine && npm install --prefix tutorials/obsidian/cg_example && npm install --prefix tutorials/sticky-cards/mine && npm install --prefix tutorials/sticky-cards/cg_example",
+    "dev": "concurrently -n site,obsidian,obsidian-cg,sticky,sticky-cg -c blue,green,green,magenta,magenta \"npm:dev:site\" \"npm:dev:obsidian\" \"npm:dev:obsidian-cg\" \"npm:dev:sticky\" \"npm:dev:sticky-cg\"",
+    "dev:site": "npx --yes serve site -l 8080",
+    "dev:obsidian": "cd tutorials/obsidian/mine && ./node_modules/.bin/next dev -p 3002",
+    "dev:obsidian-cg": "cd tutorials/obsidian/cg_example && ./node_modules/.bin/next dev -p 3012",
+    "dev:sticky": "cd tutorials/sticky-cards/mine && ./node_modules/.bin/next dev -p 3000",
+    "dev:sticky-cg": "cd tutorials/sticky-cards/cg_example && ./node_modules/.bin/next dev -p 3010"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

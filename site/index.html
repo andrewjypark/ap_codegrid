@@ -20,6 +20,7 @@
     li a { font-weight: 600; text-decoration: none; }
     li a:hover { text-decoration: underline; }
     .variant { display: block; margin-top: 0.4rem; font-size: 0.9rem; }
+    .local-note { font-size: 0.85rem; color: #888; margin-top: 2rem; }
   </style>
 </head>
 <body>
@@ -27,13 +28,24 @@
   <p class="sub">Andrew's Codegrid tutorials, practice versions alongside the original starters.</p>
   <ul>
     <li>
-      <a href="./obsidian/">Obsidian Assembly, page transitions</a>
-      <a class="variant" href="./obsidian/cg_example/">cg_example (original Codegrid starter)</a>
+      <a href="./obsidian/" data-local="http://localhost:3002/ap_codegrid/obsidian/">Obsidian Assembly, page transitions</a>
+      <a class="variant" href="./obsidian/cg_example/" data-local="http://localhost:3012/ap_codegrid/obsidian/cg_example/">cg_example (original Codegrid starter)</a>
     </li>
     <li>
-      <a href="./sticky-cards/">Sticky Cards</a>
-      <a class="variant" href="./sticky-cards/cg_example/">cg_example (original Codegrid starter)</a>
+      <a href="./sticky-cards/" data-local="http://localhost:3000/ap_codegrid/sticky-cards/">Sticky Cards</a>
+      <a class="variant" href="./sticky-cards/cg_example/" data-local="http://localhost:3010/ap_codegrid/sticky-cards/cg_example/">cg_example (original Codegrid starter)</a>
     </li>
   </ul>
+  <p class="local-note" id="local-note" hidden>
+    Running locally: links above point at each zone's dev server (run <code>npm run dev</code> from the ap_codegrid root to start them all).
+  </p>
+  <script>
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+      document.querySelectorAll("a[data-local]").forEach(function (a) {
+        a.href = a.getAttribute("data-local");
+      });
+      document.getElementById("local-note").hidden = false;
+    }
+  </script>
 </body>
 </html>
