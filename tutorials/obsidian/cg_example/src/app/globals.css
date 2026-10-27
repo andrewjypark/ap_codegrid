@@ -20,7 +20,7 @@
   width: 100%;
   justify-content: center;
   align-items: stretch;
-  font: var(var(--ap-tier-2-typography-body-default))
+  font: var(--ap-tier-2-typography-body-default);
 
 }
 
