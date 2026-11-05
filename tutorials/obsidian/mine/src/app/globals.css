@@ -1,7 +1,12 @@
+@import "ap-ds-storybook/build/all-combinations/css/variables.css";
+@import "ap-ds-storybook/styles/base.css";
+
 :root {
   --bg: #0f0f0f;
   --fg: #f2f0e6;
   --transition-grid: #f2f0e6;
+  --section_padding_top_bottom: 50px;
+
 }
 
 * {
@@ -15,6 +20,11 @@
    Global — usable in any page or component, no import needed
    ============================ */
 
+.ap_navbar {
+  position: fixed;  
+  z-index: 2;
+
+}
 .ap_grid_container {
   display: flex;
   width: 100%;
@@ -24,38 +34,24 @@
 
 }
 
-/* Combo class — stacked onto .ap_grid_container, e.g.
-   className="ap_grid_container banner_1" */
-.banner_1 {
-  padding-top: 100px;
-  padding-bottom: 100px;
+
+.ap_navbar_section {
+  grid-column: 2 / 14;  
+  align-items: flex-start;
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.ap_grid_1 {
-  position: relative;
-  display: grid;
-  width: 100%;
-  max-width: 1440px;
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  grid-auto-columns: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  grid-template-columns: minmax(0px, 0.5fr) 1fr 1fr 1fr 1fr 1fr 1fr minmax(0px, 0.5fr);
-  grid-template-rows: auto;
-  background-color: transparent;
-}
-
-@media screen and (max-width: 767px) {
-  .ap_grid_1 {
-    grid-template-columns: minmax(0px, 0.5fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(0px, 0.5fr);
+@media screen and (max-width: 992px) {
+  .ap_navbar_section {
+    grid-column: 2 / 8;
   }
 }
 
+
 .navbar {
-  position: fixed;
   width: 100%;
   padding: 1rem;
   display: flex;
@@ -81,6 +77,16 @@
   letter-spacing: -2%;
 }
 
+.ap_navbar_item_container {
+display:flex;
+flex-direction: column;
+justify-content: left;
+}
+
+.ap_navbar_logo_container{
+  display:flex;
+  flex-direction: column;
+}
 .hero {
   position: relative;
   width: 100%;

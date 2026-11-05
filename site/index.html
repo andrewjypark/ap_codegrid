@@ -1,26 +1,118 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="core_dark" data-viewport="desktop">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ap_codegrid</title>
+
+  <!-- ap-ds-storybook tier 1/2/3 tokens + the TWK Lausanne webfont, served
+       via jsDelivr off the published npm package -- this page is plain
+       static HTML with no npm/build step (no package.json here), so a
+       local import isn't an option.
+
+       build/all-combinations/css/variables.css (not tier_1_core) because
+       this page uses the "core_dark" theme: tier_1_core only ever bakes
+       ONE resolved set of values (the light "core" theme) straight onto
+       a plain :root, with no dark variant to switch to. all-combinations
+       has every theme x viewport combination, but each one only resolves
+       inside its own [data-theme="..."][data-viewport="..."] attribute
+       selector -- normally kept in sync by <ViewportSync /> in a real
+       app, which this static page has no React runtime to mount.
+       styles/viewport-sync.js below (v1.2.5+) is that same component's
+       vanilla-JS sibling, so data-viewport now tracks the real window
+       width here too, same as it would in a React app -- the
+       data-viewport value on <html> is just the initial/no-JS fallback,
+       overwritten the instant that script runs. None of the
+       var(--ap-tier-2-...)/var(--ap-tier-3-...) references further down
+       changed at all; they just resolve against core_dark's values now
+       instead of core's. Pin the version in all three URLs below when
+       ap-ds-storybook publishes a newer one. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/assets/fonts/twk-lausanne/twk-lausanne.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/build/all-combinations/css/variables.css" />
+  <script src="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/styles/viewport-sync.js"></script>
+
   <style>
-    :root { color-scheme: light dark; }
+    :root { color-scheme: dark; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--ap-tier-2-color-background-base);
+      color: var(--ap-tier-2-color-content-default);
+      font: var(--ap-tier-2-typography-body-default);
       max-width: 720px;
       margin: 4rem auto;
       padding: 0 1.5rem;
-      line-height: 1.5;
     }
-    h1 { margin-bottom: 0.25rem; }
-    p.sub { color: #666; margin-top: 0; }
+
+    h1 {
+      font: var(--ap-tier-2-typography-title-default);
+      color: var(--ap-tier-2-color-content-default);
+      margin-bottom: 0.25rem;
+    }
+
+    p.sub {
+      color: var(--ap-tier-2-color-content-subtle);
+      margin-top: 0;
+    }
+
     ul { list-style: none; padding: 0; }
-    li { margin: 1.25rem 0; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; }
-    li a { font-weight: 600; text-decoration: none; }
-    li a:hover { text-decoration: underline; }
-    .variant { display: block; margin-top: 0.4rem; font-size: 0.9rem; }
-    .local-note { font-size: 0.85rem; color: #888; margin-top: 2rem; }
+
+    li {
+      margin: 1.25rem 0;
+      padding: 1rem;
+      background: var(--ap-tier-2-color-background-surface-primary);
+      border: 1px solid var(--ap-tier-2-color-background-surface-secondary);
+      border-radius: 8px;
+    }
+
+    li > .ap-link {
+      font: var(--ap-tier-2-typography-label-default);
+    }
+
+    .variant {
+      display: block;
+      margin-top: 0.4rem;
+      font: var(--ap-tier-2-typography-body-sm);
+    }
+
+    .local-note {
+      font-size: 0.85rem;
+      color: var(--ap-tier-2-color-content-subtle);
+      margin-top: 2rem;
+    }
+
+    /* ---- ap-ds-storybook <Link>, replicated by hand ------------------------
+       This is a plain static page with no React runtime, so the real
+       component (components/Components/Link/Link.jsx) can't be mounted --
+       its className/style-merge quirk (documented in ap_ds_storybook's
+       CLAUDE.md) is moot here since there's no prop spreading at all.
+       What follows is Link.css's actual ruleset copied 1:1, with the four
+       --link-color-* custom properties its stateVars object computes at
+       render time baked onto the class instead of set inline per instance.
+       Pointed at the "content" variant's tokens, not "knockout" -- every
+       link on this page sits on the light tier-2 base background, not a
+       dark/image surface. If a knockout instance is ever needed here, add
+       a `.ap-link[data-knockout]` override pointing at the
+       --ap-tier-3-link-color-knockout-* tokens instead, mirroring the
+       component's own `knockout` prop. */
+    .ap-link {
+      --link-color-default: var(--ap-tier-3-link-color-content-default);
+      --link-color-hover: var(--ap-tier-3-link-color-content-hover);
+      --link-color-active: var(--ap-tier-3-link-color-content-active);
+      --link-color-visited: var(--ap-tier-3-link-color-content-visited);
+      color: var(--link-color-default);
+      cursor: pointer;
+      text-decoration: underline;
+      transition: color 0.25s ease-in-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ap-link { transition: none; }
+    }
+
+    /* LVHA order, same reasoning Link.css documents. */
+    .ap-link:visited { color: var(--link-color-visited); }
+    .ap-link:hover { color: var(--link-color-hover); }
+    .ap-link:active { color: var(--link-color-active); }
   </style>
 </head>
 <body>
@@ -28,12 +120,12 @@
   <p class="sub">Andrew's Codegrid tutorials, practice versions alongside the original starters.</p>
   <ul>
     <li>
-      <a href="./obsidian/" data-local="http://localhost:3002/obsidian/">Obsidian Assembly, page transitions</a>
-      <a class="variant" href="./obsidian/cg_example/" data-local="http://localhost:3012/obsidian/cg_example/">cg_example (original Codegrid starter)</a>
+      <a class="ap-link" href="./obsidian/" data-local="http://localhost:3002/obsidian/">Obsidian Assembly, page transitions</a>
+      <a class="ap-link variant" href="./obsidian/cg_example/" data-local="http://localhost:3012/obsidian/cg_example/">cg_example (original Codegrid starter)</a>
     </li>
     <li>
-      <a href="./sticky-cards/" data-local="http://localhost:3000/sticky-cards/">Sticky Cards</a>
-      <a class="variant" href="./sticky-cards/cg_example/" data-local="http://localhost:3010/sticky-cards/cg_example/">cg_example (original Codegrid starter)</a>
+      <a class="ap-link" href="./sticky-cards/" data-local="http://localhost:3000/sticky-cards/">Sticky Cards</a>
+      <a class="ap-link variant" href="./sticky-cards/cg_example/" data-local="http://localhost:3010/sticky-cards/cg_example/">cg_example (original Codegrid starter)</a>
     </li>
   </ul>
   <p class="local-note" id="local-note" hidden>

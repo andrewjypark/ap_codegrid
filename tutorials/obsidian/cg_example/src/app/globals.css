@@ -2,6 +2,24 @@
   --bg: #0f0f0f;
   --fg: #f2f0e6;
   --transition-grid: #f2f0e6;
+
+  /* Plain local values, not an ap-ds-storybook import -- this zone has no
+     design-system dependency (removed on purpose, see package.json) and
+     never did. --section_padding_top_bottom is just this project's own
+     spacing knob, same convention every other zone's globals.css uses it
+     for (never actually part of the npm package's exported tokens).
+     --ap-tier-2-typography-body-default is a real design-system token
+     name, but its value is hardcoded here rather than pulled from the
+     package -- these two custom properties were left referencing
+     undefined vars after an earlier install got reverted out of this
+     zone, so .ap_grid_container's font and .ap_header_section's padding
+     below were silently no-ops. Defining them locally fixes that without
+     reintroducing the dependency. Note TWK Lausanne itself still isn't
+     loaded anywhere in this zone, so the font-family will fall back to
+     the browser default -- only the weight/size/line-height actually
+     take effect. */
+  --section_padding_top_bottom: 50px;
+  --ap-tier-2-typography-body-default: 300 16px/24px 'TWK Lausanne';
 }
 
 * {
@@ -15,11 +33,18 @@
    Global — usable in any page or component, no import needed
    ============================ */
 
+
 .ap_grid_container {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: stretch;
+  font: var(--ap-tier-2-typography-body-default);
+}
+
+
+.ap_header_section {
+  padding: var(--section_padding_top_bottom) 0px;
 }
 
 /* Combo class — stacked onto .ap_grid_container, e.g.
@@ -41,16 +66,30 @@
   grid-auto-columns: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  grid-template-columns: minmax(0px, 0.5fr) 1fr 1fr 1fr 1fr 1fr 1fr minmax(0px, 0.5fr);
+  grid-template-columns: minmax(0px, 0.5fr) repeat(12, 1fr) minmax(0px, 0.5fr);
   grid-template-rows: auto;
   background-color: transparent;
 }
+
+/* For Tablet */
+
+@media screen and (max-width: 991px) {
+  .ap_grid_1 {
+    grid-template-columns: minmax(0px, 0.5fr) 1fr 1fr 1fr 1fr 1fr 1fr minmax(0px, 0.5fr);
+
+  }
+}
+
+/* For Mobile */
 
 @media screen and (max-width: 767px) {
   .ap_grid_1 {
     grid-template-columns: minmax(0px, 0.5fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(0px, 0.5fr);
   }
 }
+
+
+
 
 .navbar {
   position: fixed;
