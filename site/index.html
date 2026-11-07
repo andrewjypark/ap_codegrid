@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="core_dark" data-viewport="desktop">
+<html lang="en" data-theme="core" data-viewport="desktop">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,109 +28,70 @@
        instead of core's. Pin the version in all three URLs below when
        ap-ds-storybook publishes a newer one. -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/assets/fonts/twk-lausanne/twk-lausanne.css" />
+  <!-- Basil (Basier Circle/Square/Square Mono) + Molasses (Nudica/Quablo/
+       Bricolage Grotesque) webfonts. Without these, the browser falls back
+       to the locally installed Basier copies, which render as tofu boxes. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/assets/fonts/basier-circle/basier-circle.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/assets/fonts/basier-square/basier-square.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/assets/fonts/basier-square-mono/basier-square-mono.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/assets/fonts/nudica/nudica.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/assets/fonts/quablo/quablo.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/assets/fonts/bricolage-grotesque/bricolage-grotesque.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/build/all-combinations/css/variables.css" />
   <script src="https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/styles/viewport-sync.js"></script>
 
-  <style>
-    :root { color-scheme: dark; }
-
-    body {
-      background: var(--ap-tier-2-color-background-base);
-      color: var(--ap-tier-2-color-content-default);
-      font: var(--ap-tier-2-typography-body-default);
-      max-width: 720px;
-      margin: 4rem auto;
-      padding: 0 1.5rem;
-    }
-
-    h1 {
-      font: var(--ap-tier-2-typography-title-default);
-      color: var(--ap-tier-2-color-content-default);
-      margin-bottom: 0.25rem;
-    }
-
-    p.sub {
-      color: var(--ap-tier-2-color-content-subtle);
-      margin-top: 0;
-    }
-
-    ul { list-style: none; padding: 0; }
-
-    li {
-      margin: 1.25rem 0;
-      padding: 1rem;
-      background: var(--ap-tier-2-color-background-surface-primary);
-      border: 1px solid var(--ap-tier-2-color-background-surface-secondary);
-      border-radius: 8px;
-    }
-
-    li > .ap-link {
-      font: var(--ap-tier-2-typography-label-default);
-    }
-
-    .variant {
-      display: block;
-      margin-top: 0.4rem;
-      font: var(--ap-tier-2-typography-body-sm);
-    }
-
-    .local-note {
-      font-size: 0.85rem;
-      color: var(--ap-tier-2-color-content-subtle);
-      margin-top: 2rem;
-    }
-
-    /* ---- ap-ds-storybook <Link>, replicated by hand ------------------------
-       This is a plain static page with no React runtime, so the real
-       component (components/Components/Link/Link.jsx) can't be mounted --
-       its className/style-merge quirk (documented in ap_ds_storybook's
-       CLAUDE.md) is moot here since there's no prop spreading at all.
-       What follows is Link.css's actual ruleset copied 1:1, with the four
-       --link-color-* custom properties its stateVars object computes at
-       render time baked onto the class instead of set inline per instance.
-       Pointed at the "content" variant's tokens, not "knockout" -- every
-       link on this page sits on the light tier-2 base background, not a
-       dark/image surface. If a knockout instance is ever needed here, add
-       a `.ap-link[data-knockout]` override pointing at the
-       --ap-tier-3-link-color-knockout-* tokens instead, mirroring the
-       component's own `knockout` prop. */
-    .ap-link {
-      --link-color-default: var(--ap-tier-3-link-color-content-default);
-      --link-color-hover: var(--ap-tier-3-link-color-content-hover);
-      --link-color-active: var(--ap-tier-3-link-color-content-active);
-      --link-color-visited: var(--ap-tier-3-link-color-content-visited);
-      color: var(--link-color-default);
-      cursor: pointer;
-      text-decoration: underline;
-      transition: color 0.25s ease-in-out;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .ap-link { transition: none; }
-    }
-
-    /* LVHA order, same reasoning Link.css documents. */
-    .ap-link:visited { color: var(--link-color-visited); }
-    .ap-link:hover { color: var(--link-color-hover); }
-    .ap-link:active { color: var(--link-color-active); }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>ap_codegrid</h1>
-  <p class="sub">Andrew's Codegrid tutorials, practice versions alongside the original starters.</p>
-  <ul>
-    <li>
-      <a class="ap-link" href="./obsidian/" data-local="http://localhost:3002/obsidian/">Obsidian Assembly, page transitions</a>
-      <a class="ap-link variant" href="./obsidian/cg_example/" data-local="http://localhost:3012/obsidian/cg_example/">cg_example (original Codegrid starter)</a>
-    </li>
-    <li>
-      <a class="ap-link" href="./sticky-cards/" data-local="http://localhost:3000/sticky-cards/">Sticky Cards</a>
-      <a class="ap-link variant" href="./sticky-cards/cg_example/" data-local="http://localhost:3010/sticky-cards/cg_example/">cg_example (original Codegrid starter)</a>
-    </li>
-  </ul>
-  <p class="local-note" id="local-note" hidden>
-    Running locally: links above point at each zone's dev server (run <code>npm run dev</code> from the ap_codegrid root to start them all).
-  </p>
+  <div class="ap_grid_container">
+    <div class="ap_grid_1">
+      <div class="cg_home_header_container">
+        <div class="cg_home_header_text_container">
+          <h1 class="cg_home_header_text">ap_codegrid</h1>
+        </div>
+        <div class="cg_home_subheader_text_container">
+          <p class="cg_home_subheader_text">Practice versions and Original versions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ap_grid_container">
+    <div class="ap_grid_1 cg_home_project_list_wrapper">
+      <div class="cg_home_project_list_container">
+
+        <!-- Obsidian Projects Section  -->
+        <div class="cg_home_project_item_container">
+          <div class="cg_home_project_item_text_container">
+            <a class="ap_link_with_underline" href="./obsidian/" data-local="http://localhost:3002/obsidian/">
+              Obsidian Assembly, page transitions
+            </a>
+          </div>
+          <div class="cg_home_project_item_text_container">
+            <a class="ap_link_with_underline" href="./obsidian/cg_example/" data-local="http://localhost:3012/obsidian/cg_example/">
+              Obsidian cg_example (original Codegrid starter)
+            </a>
+          </div>
+        </div>
+        
+        <!-- Sticky Cards ProjectsSection -->
+        <div class="cg_home_project_item_container">
+          <div class="cg_home_project_item_text_container">
+            <a class="ap_link_with_underline" href="./sticky-cards/" data-local="http://localhost:3000/sticky-cards/">
+              Sticky Cards, page transitions
+            </a>
+          </div>
+          <div class="cg_home_project_item_text_container">
+            <a class="ap_link_with_underline variant" href="./sticky-cards/cg_example/" data-local="http://localhost:3010/sticky-cards/cg_example/">
+              Sticky Cards (original Codegrid starter)
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <script>
     if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
       document.querySelectorAll("a[data-local]").forEach(function (a) {

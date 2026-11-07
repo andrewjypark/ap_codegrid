@@ -1,0 +1,197 @@
+@import url("https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/styles/base.css");
+
+/* Reset browser defaults */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font: inherit; /* drops the default size and bold */
+}
+
+:root { 
+  /* color-scheme: dark;  */
+  --section_padding_small_top_bottom: 25px;
+  --section_padding_medium_top_bottom: 50px;
+  --section_padding_large_top_bottom: 100px;
+
+
+}
+/* ...rest of your styles */
+
+body {
+  background: var(--ap-tier-2-color-background-base);
+  color: var(--ap-tier-2-color-content-default);
+  font: var(--ap-tier-2-typography-body-default);
+  padding: var(--section_padding_small_top_bottom) 0;
+}
+
+/* ---- ap-ds-storybook <Link>, replicated by hand ------------------------
+   This is a plain static page with no React runtime, so the real
+   component (components/Components/Link/Link.jsx) can't be mounted --
+   its className/style-merge quirk (documented in ap_ds_storybook's
+   CLAUDE.md) is moot here since there's no prop spreading at all.
+   What follows is Link.css's actual ruleset copied 1:1, with the four
+   --link-color-* custom properties its stateVars object computes at
+   render time baked onto the class instead of set inline per instance.
+   Pointed at the "content" variant's tokens, not "knockout" -- every
+   link on this page sits on the light tier-2 base background, not a
+   dark/image surface. If a knockout instance is ever needed here, add
+   an `[data-knockout]` override pointing at the
+   --ap-tier-3-link-color-knockout-* tokens instead, mirroring the
+   component's own `knockout` prop. */
+.ap_link_with_underline,
+.ap_link_without_underline {
+  --link-color-default: var(--ap-tier-3-link-color-content-default);
+  --link-color-hover: var(--ap-tier-3-link-color-content-hover);
+  --link-color-active: var(--ap-tier-3-link-color-content-active);
+  --link-color-visited: var(--ap-tier-3-link-color-content-visited);
+  color: var(--link-color-default);
+  cursor: pointer;
+  transition: color 0.25s ease-in-out;
+}
+
+.ap_link_with_underline { text-decoration: underline; }
+.ap_link_without_underline { text-decoration: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ap_link_with_underline,
+  .ap_link_without_underline { transition: none; }
+}
+
+/* LVHA order, same reasoning Link.css documents. */
+.ap_link_with_underline:visited,
+.ap_link_without_underline:visited { color: var(--link-color-visited); }
+.ap_link_with_underline:hover,
+.ap_link_without_underline:hover { color: var(--link-color-hover); }
+.ap_link_with_underline:active,
+.ap_link_without_underline:active { color: var(--link-color-active); }
+
+/* 
+.ap_grid_container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: stretch;
+  font: var(--ap-tier-2-typography-body-default);
+
+}
+
+
+.ap_grid_1 {
+  position: relative;
+  display: grid;
+  width: 100%;
+  max-width: 1440px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  grid-auto-columns: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-columns: minmax(0px, 0.5fr) repeat(12, 1fr) minmax(0px, 0.5fr);
+  grid-template-rows: auto;
+  background-color: transparent;
+}
+
+/* For Tablet */
+
+@media screen and (max-width: 991px) {
+  .ap_grid_1 {
+    grid-template-columns: minmax(0px, 0.5fr) 1fr 1fr 1fr 1fr 1fr 1fr minmax(0px, 0.5fr);
+
+  }
+}
+
+/* For Mobile */
+
+@media screen and (max-width: 767px) {
+  .ap_grid_1 {
+    grid-template-columns: minmax(0px, 0.5fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(40px, 1fr) minmax(0px, 0.5fr);
+  }
+} */
+
+
+
+/* Grid-child class — nested inside an .ap_grid_1 container to get its
+   column placement, e.g.
+   <div className="ap_grid_1"><div className="ap_header_container">...</div></div> */
+.ap_example_container {
+  grid-column: 2 / 14;
+  background-color: var(--ap-tier-2-color-background-surface-secondary);
+}
+
+@media screen and (max-width: 992px) {
+  .ap_example_container {
+    grid-column: 2 / 8;
+  }
+}
+
+.cg_home_header_container {
+  grid-column: 2 / 14;
+  /* background-color: var(--ap-tier-2-color-background-surface-secondary); */
+  padding: var(--section_padding_small_top_bottom) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media screen and (max-width: 992px) {
+  .cg_home_header_container {
+    grid-column: 2 / 8;
+  }
+}
+
+.cg_home_header_text_container{
+  display: flex;
+  flex-direction: column;
+}
+.cg_home_header_text_container{
+  display: flex;
+  flex-direction: column;
+}
+
+.cg_home_header_text{
+  font: var(--ap-tier-2-typography-title-lg);
+}
+
+.cg_home_subheader_text_container{
+  display: flex;
+  flex-direction: column;
+}
+
+.cg_home_subheader_text{
+  font: var(--ap-tier-2-typography-body-lg
+);
+}
+
+.cg_home_project_list_wrapper {
+  padding: var(--section_padding_small_top_bottom) 0;
+}
+
+.cg_home_project_list_container {
+  grid-column: 2 / 8;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media screen and (max-width: 992px) {
+  .cg_home_project_list_container {
+    grid-column: 2 / 8;
+  }
+}
+
+.cg_home_project_item_container{
+  display: flex;
+  flex-direction: column;
+  gap:12px;
+  padding: 1rem;
+  background: var(--ap-tier-2-color-background-surface-primary);
+  border: 1px solid var(--ap-tier-2-color-border-default);
+  border-radius: 8px;
+}

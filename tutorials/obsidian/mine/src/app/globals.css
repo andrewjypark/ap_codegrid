@@ -1,5 +1,10 @@
 @import "ap-ds-storybook/build/all-combinations/css/variables.css";
 @import "ap-ds-storybook/styles/base.css";
+/* basil_dark fonts (set on <html> in layout.js). variables.css only names
+   the families; these load the actual @font-face files from the package. */
+@import "ap-ds-storybook/assets/fonts/basier-circle/basier-circle.css";
+@import "ap-ds-storybook/assets/fonts/basier-square/basier-square.css";
+@import "ap-ds-storybook/assets/fonts/basier-square-mono/basier-square-mono.css";
 
 :root {
   --bg: #0f0f0f;
@@ -15,6 +20,41 @@
   box-sizing: border-box;
 }
 
+
+
+/* ---- ap-ds-storybook <Link> styles, applied by class --------------------
+   Same approach as site/index.html: Link.css's ruleset with the
+   --link-color-* values the <Link> component would set inline baked onto
+   the class instead. Used as a className on next-transition-router's
+   <Link> (not the package's <Link>, which renders a plain <a> and would
+   skip the page transition). "content" variant tokens. */
+.ap_link_with_underline,
+.ap_link_without_underline {
+  --link-color-default: var(--ap-tier-3-link-color-content-default);
+  --link-color-hover: var(--ap-tier-3-link-color-content-hover);
+  --link-color-active: var(--ap-tier-3-link-color-content-active);
+  --link-color-visited: var(--ap-tier-3-link-color-content-visited);
+  color: var(--link-color-default);
+  cursor: pointer;
+  transition: color 0.25s ease-in-out;
+}
+
+.ap_link_with_underline { text-decoration: underline; }
+.ap_link_without_underline { text-decoration: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ap_link_with_underline,
+  .ap_link_without_underline { transition: none; }
+}
+
+/* LVHA order, same reasoning Link.css documents. */
+.ap_link_with_underline:visited,
+.ap_link_without_underline:visited { color: var(--link-color-visited); }
+.ap_link_with_underline:hover,
+.ap_link_without_underline:hover { color: var(--link-color-hover); }
+.ap_link_with_underline:active,
+.ap_link_without_underline:active { color: var(--link-color-active); }
+
 /* ============================
    Base / utility classes
    Global — usable in any page or component, no import needed
@@ -25,6 +65,7 @@
   z-index: 2;
 
 }
+
 .ap_grid_container {
   display: flex;
   width: 100%;
@@ -69,9 +110,14 @@
   padding: 1.5rem;
 }
 
-.navbar-item a {
+/* :not(...) so these don't override the ap_link_* colors/underline
+   (".navbar-item a" is more specific than a single class). */
+.navbar-item a:not(.ap_link_with_underline):not(.ap_link_without_underline) {
   text-decoration: none;
   color: var(--fg);
+}
+
+.navbar-item a {
   font-family: var(--font-instrument-sans);
   font-weight: 500;
   letter-spacing: -2%;

@@ -1,5 +1,6 @@
 import { Instrument_Serif, Instrument_Sans } from "next/font/google";
 import "./globals.css";
+import { ViewportSync } from "ap-ds-storybook";
 
 import NavBar from "@/components/Navbar";
 import TransitionProvider from "@/providers/TransitionProvider";
@@ -37,9 +38,14 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
+      data-theme="basil_dark"
       className={`${instrumentSerif.variable} ${instrumentSans.variable}`}
     >
       <body>
+        {/* Keeps data-viewport on <html> in sync with the window width.
+            ap-ds tokens only resolve when data-theme AND data-viewport
+            sit on the same element, so both live on <html>. */}
+        <ViewportSync />
         {/*
           TransitionProvider (src/providers/TransitionProvider.jsx) also
           accepts a `children` prop. Here we're forwarding NavBar and the

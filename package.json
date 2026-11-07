@@ -4,7 +4,7 @@
   "scripts": {
     "setup": "npm install && npm install --prefix tutorials/obsidian/mine && npm install --prefix tutorials/obsidian/cg_example && npm install --prefix tutorials/sticky-cards/mine && npm install --prefix tutorials/sticky-cards/cg_example",
     "dev": "concurrently -n site,obsidian,obsidian-cg,sticky,sticky-cg -c blue,green,green,magenta,magenta \"npm:dev:site\" \"npm:dev:obsidian\" \"npm:dev:obsidian-cg\" \"npm:dev:sticky\" \"npm:dev:sticky-cg\"",
-    "dev:site": "npx --yes serve site -l 8080",
+    "dev:site": "npx --yes live-server site --port=8080 --no-browser",
     "dev:obsidian": "cd tutorials/obsidian/mine && ./node_modules/.bin/next dev -p 3002",
     "dev:obsidian-cg": "cd tutorials/obsidian/cg_example && ./node_modules/.bin/next dev -p 3012",
     "dev:sticky": "cd tutorials/sticky-cards/mine && ./node_modules/.bin/next dev -p 3000",
