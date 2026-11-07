@@ -1,8 +1,24 @@
 const Genesis = () => {
   return (
-    <section className="hero genesis">
-      <h1>Genesis</h1>
-    </section>
+    <div className="ap_grid_container">
+      <div className="cg_obsidian_hero_image_container emberfall">
+
+      </div>
+      <div className="ap_grid_1">
+        <div className="cg_obsidian_hero_content_wrapper">
+          <div className="cg_obsidian_hero_text_container">
+            <h1 className="cg_obsidian_hero_text">
+              Genesis
+            </h1>
+          </div>
+          
+        </div>
+        {/* <div className="hero genesis">
+         <h1 className>Genesis</h1>
+       </div> */}
+      </div>
+    </div>
+    
   );
 };
 

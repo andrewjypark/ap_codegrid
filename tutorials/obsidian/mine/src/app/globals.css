@@ -6,19 +6,46 @@
 @import "ap-ds-storybook/assets/fonts/basier-square/basier-square.css";
 @import "ap-ds-storybook/assets/fonts/basier-square-mono/basier-square-mono.css";
 
-:root {
-  --bg: #0f0f0f;
-  --fg: #f2f0e6;
-  --transition-grid: #f2f0e6;
-  --section_padding_top_bottom: 50px;
+@import url("https://cdn.jsdelivr.net/npm/ap-ds-storybook@1.2.5/styles/base.css");
 
-}
-
-* {
+/* Reset browser defaults */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font: inherit; /* drops the default size and bold */
+}
+
+:root { 
+  /* color-scheme: dark;  */
+  --section_padding_small_top_bottom: 25px;
+  --section_padding_medium_top_bottom: 50px;
+  --section_padding_large_top_bottom: 100px;
+
+
+}
+/* ...rest of your styles */
+
+:root {
+  /* --bg: #0f0f0f;
+  --fg: #f2f0e6; */
+  --transition-grid: #f2f0e6;
+
+}
+
+
+body {
+  background: var(--ap-tier-2-color-background-base);
+  color: var(--ap-tier-2-color-content-default);
+  font: var(--ap-tier-2-typography-body-default);
+  /* padding: var(--section_padding_small_top_bottom) 0; */
+}
+
 
 
 
@@ -76,7 +103,7 @@
 }
 
 
-.ap_navbar_section {
+.cg_navbar_section {
   grid-column: 2 / 14;  
   align-items: flex-start;
   padding: 20px 0px;
@@ -86,52 +113,68 @@
 }
 
 @media screen and (max-width: 992px) {
-  .ap_navbar_section {
+  .cg_navbar_section {
     grid-column: 2 / 8;
   }
 }
 
 
-.navbar {
-  width: 100%;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  z-index: 2;
-}
-
-.navbar-items {
-  display: flex;
-  gap: clamp(1rem, 4vw, 2rem);
-}
-
-.navbar-item {
-  padding: 1.5rem;
-}
-
-/* :not(...) so these don't override the ap_link_* colors/underline
-   (".navbar-item a" is more specific than a single class). */
-.navbar-item a:not(.ap_link_with_underline):not(.ap_link_without_underline) {
-  text-decoration: none;
-  color: var(--fg);
-}
-
-.navbar-item a {
-  font-family: var(--font-instrument-sans);
-  font-weight: 500;
-  letter-spacing: -2%;
-}
-
-.ap_navbar_item_container {
+.cg_navbar_item_container {
 display:flex;
 flex-direction: column;
 justify-content: left;
 }
 
-.ap_navbar_logo_container{
+.cg_navbar_logo_container{
   display:flex;
   flex-direction: column;
+}
+
+.cg_obsidian_hero_content_wrapper {
+  grid-column: 2 / 14;
+
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  color: var(--ap-tier-2-color-content-default);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+
+@media screen and (max-width: 992px) {
+  .cg_obsidian_hero_content_wrapper {
+    grid-column: 2 / 8;
+  }
+}
+
+.cg_obsidian_hero_image_container{
+  position: absolute;
+  /* z-index: 2; */
+  width:100%;
+  height:100svh;
+}
+
+.cg_obsidian_hero_image_container.emberfall {
+  background: url(/obsidian/img1.jpg) no-repeat 50% 50%;
+  background-size: cover;
+}
+
+
+@media screen and (max-width: 992px) {
+  .ap_example_container {
+    grid-column: 2 / 8;
+  }
+}
+
+.cg_obsidian_hero_text_container{
+
+}
+
+.cg_obsidian_hero_text{
+  font: var(--ap-tier-2-typography-display-default)
 }
 .hero {
   position: relative;

@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      data-theme="basil_dark"
+      data-theme="core_dark"
       className={`${instrumentSerif.variable} ${instrumentSans.variable}`}
     >
       <body>
