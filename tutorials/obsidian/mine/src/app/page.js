@@ -1,7 +1,7 @@
 const Genesis = () => {
   return (
     <div className="ap_grid_container">
-      <div className="cg_obsidian_hero_image_container emberfall">
+      <div className="cg_obsidian_hero_image_container genesis">
 
       </div>
       <div className="ap_grid_1">
@@ -10,12 +10,8 @@ const Genesis = () => {
             <h1 className="cg_obsidian_hero_text">
               Genesis
             </h1>
-          </div>
-          
+          </div>          
         </div>
-        {/* <div className="hero genesis">
-         <h1 className>Genesis</h1>
-       </div> */}
       </div>
     </div>
     

@@ -8,7 +8,7 @@ const NavBar = () => {
           <Link href="/">Emberfall</Link>
         </div>
       </div>
-      <div className="navbar-items">
+      <div className="cg_navbar_items">
         <div className="navbar-item">
           <Link href="/">Genesis</Link>
         </div>
